@@ -4,6 +4,15 @@ from ProductoFisico import ProductoFisico
 from typing import Optional, Dict, List
 from Farmaceutico import Farmaceutico
 from datetime import datetime
+from json import JSONEncoder
+import json
+
+class MyEncoder(JSONEncoder):
+    def default(self, object):
+        if isinstance(object, Farmaceutico) or isinstance(object, Producto) or isinstance(object, ProductoFisico) or isinstance(object, Tienda) or isinstance(object, Venta) :
+            return object.__dict__
+        else:
+            return json.JSONEncoder.default(self, object)
 
 class Tienda:
     def __init__(self, direccion: str) -> None:
@@ -12,6 +21,20 @@ class Tienda:
         self.productos: Dict[str, ProductoFisico] = dict()
         self.empleados: Dict[str, Farmaceutico] = dict()
         self.ventas: List[Venta] = list()
+
+    def __init__(self, dict: dict) -> None:
+        pass
+
+    def load(self) -> None:
+        db = open("Tienda.json")
+        # Se carga la tienda
+
+        db.close()
+
+    def save(self) -> None:
+        db = open("Tienda.json", 'w')
+        db.write(MyEncoder().encode(self))
+        db.close()
 
     def mostrar_ventas(self) -> None:
         for v in self.ventas:
@@ -28,7 +51,7 @@ class Tienda:
         venta: Venta = Venta(empleado, datetime.now())
         while True:
             codigo_fisico: str = input("Ingrese el codigo del producto a comprar (o -1 para dejar de agregar productos): ")
-            if (int(codigo_fisico) == -1):
+            if (codigo_fisico == "-1"):
                 break
             producto_fisico: Optional[ProductoFisico] = self.productos.get(codigo_fisico)
             if (producto_fisico is None):
@@ -49,15 +72,15 @@ class Tienda:
             codigo: str = input("Ingrese el codigo del producto del catalogo a abastecer (o -1 para dejar de agregar productos): ")
             if (int(codigo) == -1):
                 break
-            producto: Producto = self.productos.get(codigo)
+            producto: Producto = self.catalogo.get(codigo)
             if producto is None:
                 print("No existe dicho producto en el catalogo.")
                 return False
             codigo_fisico: str = input("Ingrese el codigo fisico del nuevo producto: ")
-            fecha_expiracion: datetime = datetime.strptime(input("Ingrese la fecha de expiracion del nuevo producto: "))
+            fecha_expiracion: datetime = datetime.strptime(input("Ingrese la fecha de expiracion del nuevo producto: "), "%d-%m-%Y")
             stock: int = int(input("Ingrese la cantidad de este producto que desea abastecer: "))
             producto_fisico: ProductoFisico = ProductoFisico(codigo_fisico, producto, stock, fecha_expiracion)
-            self.productos.update({codigo_fisico, producto_fisico})
+            self.productos.update({codigo_fisico: producto_fisico})
         return True
         
 

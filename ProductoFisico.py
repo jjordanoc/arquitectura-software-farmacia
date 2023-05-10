@@ -17,3 +17,6 @@ class ProductoFisico:
 
     def mostrar_producto(self) -> None:
         self.producto.mostrar_producto()
+        print("Codigo_fisico: " + self.codigo_fisico, end=', ')
+        print("Stock: " + str(self.stock), end=', ')
+        print("Fecha de expiracion: " + str(self.fecha_expiracion))
