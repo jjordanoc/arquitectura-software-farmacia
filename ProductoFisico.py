@@ -2,10 +2,15 @@ from Producto import Producto
 from datetime import datetime
 
 class ProductoFisico:
-    def __init__(self, codigo_fisico: str, producto: Producto|dict, stock: int, fecha_expiracion: datetime) -> None:
+    def __init__(self, codigo_fisico: str, producto: Producto|dict, stock: int, fecha_expiracion: datetime|str) -> None:
         self.codigo_fisico: str = codigo_fisico
         self.stock: int = stock
-        self.fecha_expiracion: datetime = fecha_expiracion
+        
+        if isinstance(fecha_expiracion, str):
+            self.fecha_expiracion: datetime = datetime.fromisoformat(fecha_expiracion)
+        elif isinstance(fecha_expiracion, datetime):
+            self.fecha_expiracion: datetime = fecha_expiracion
+
         if isinstance(producto, Producto):
             self.producto: Producto = producto
         elif isinstance(producto, dict):

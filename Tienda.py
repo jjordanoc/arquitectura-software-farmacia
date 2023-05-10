@@ -17,9 +17,6 @@ class MyEncoder(JSONEncoder):
         else:
             return json.JSONEncoder.default(self, object)
 
-def tienda_decoder(tiendaDict: dict):
-    return namedtuple('X', tiendaDict.keys())(*tiendaDict.values())
-
 class Tienda:
     def __init__(self, direccion: str) -> None:
         self.direccion: str = direccion
@@ -33,7 +30,7 @@ class Tienda:
         tienda_dict = json.load(db)
         self.direccion = tienda_dict["direccion"]
 
-        for venta in tienda_dict["ventas"]:
+        for venta in tienda_dict["ventas"]:            
             self.ventas.append(Venta(**venta))
 
         for key in tienda_dict["productos"]:
@@ -66,7 +63,7 @@ class Tienda:
         if (empleado is None):
             print("Debe ingresar el DNI de un empleado contratado.")
             return False
-        venta: Venta = Venta(empleado, datetime.now())
+        venta: Venta = Venta(cantidades=None, productos=None, empleado=empleado, fecha=datetime.now())
         while True:
             codigo_fisico: str = input("Ingrese el codigo del producto a comprar (o -1 para dejar de agregar productos): ")
             if (codigo_fisico == "-1"):
@@ -97,7 +94,7 @@ class Tienda:
             codigo_fisico: str = input("Ingrese el codigo fisico del nuevo producto: ")
             fecha_expiracion: datetime = datetime.strptime(input("Ingrese la fecha de expiracion del nuevo producto: "), "%d-%m-%Y")
             stock: int = int(input("Ingrese la cantidad de este producto que desea abastecer: "))
-            producto_fisico: ProductoFisico = ProductoFisico(codigo_fisico, producto, stock, fecha_expiracion)
+            producto_fisico: ProductoFisico = ProductoFisico(codigo_fisico=codigo_fisico, producto=producto,stock=stock, fecha_expiracion=fecha_expiracion)
             self.productos.update({codigo_fisico: producto_fisico})
         return True
         
@@ -113,7 +110,7 @@ class Tienda:
             precio: float = input("Ingrese precio: ")
             categoria: str = input("Ingrese categoria: ")
             url_imagen: str = input("Ingrese url de imagen: ")
-            producto: Producto = Producto(codigo, nombre, presentacion, descripcion, precio, categoria, url_imagen)
+            producto: Producto = Producto(codigo=codigo,nombre=nombre,presentacion=presentacion,descripcion=descripcion,precio=precio,categoria=categoria,url_imagen=url_imagen)
             self.catalogo.update({codigo: producto})
         return True
 
@@ -123,7 +120,7 @@ class Tienda:
             if (int(dni) == -1):
                 break
             nombre: str = input("Ingrese nombre del farmaceutico: ")
-            empleado: Farmaceutico = Farmaceutico(dni, nombre)
+            empleado: Farmaceutico = Farmaceutico(dni=dni,nombre=nombre)
             self.empleados.update({dni: empleado})
         return True
     

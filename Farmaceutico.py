@@ -6,3 +6,6 @@ class Farmaceutico:
     def mostrar_informacion(self) -> None:
         print("DNI: " + self.dni, end=', ')
         print("Nombre: " + self.nombre)
+
+    def __repr__(self) -> str:
+        return "dni: {}, nombre: {}".format(self.dni, self.nombre)

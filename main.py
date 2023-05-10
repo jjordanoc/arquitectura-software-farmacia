@@ -17,10 +17,11 @@ def menu() -> None:
                 print("\t2. Actualizar catalogo")
                 print("\t3. Abastecer productos")
                 print("\t4. Mostrar empleados")
-                print("\t5. Volver")
+                print("\t5. Mostrar ventas")
+                print("\t6. Volver")
                 opcion: int = int(input("\nOpcion: "))
                 print()
-                if opcion == 5:
+                if opcion == 6:
                     break
                 if opcion == 1:
                     babel_farma.contratar_empleados()
@@ -30,6 +31,8 @@ def menu() -> None:
                     babel_farma.abastecer_productos()
                 elif opcion == 4:
                     babel_farma.mostrar_empleados()
+                elif opcion == 5:
+                    babel_farma.mostrar_ventas()
 
         elif (contrasenia != "-1"):
             while True:

@@ -37,7 +37,7 @@
         },
         "202110069": {
             "codigo_fisico": "202110069",
-            "stock": 51,
+            "stock": 41,
             "fecha_expiracion": "2028-10-05T00:00:00",
             "producto": {
                 "codigo": "5678",
@@ -97,6 +97,32 @@
             "empleado": {
                 "dni": "71737321",
                 "nombre": "Renato"
+            }
+        },
+        {
+            "cantidades": [
+                10
+            ],
+            "productos": [
+                {
+                    "codigo_fisico": "202110069",
+                    "stock": 41,
+                    "fecha_expiracion": "2028-10-05T00:00:00",
+                    "producto": {
+                        "codigo": "5678",
+                        "nombre": "Cetirizina",
+                        "presentacion": "60ml",
+                        "descripcion": "Cetirizina via oral",
+                        "precio": "15",
+                        "categoria": "Antihistaminico",
+                        "url_imagen": "https://Cetirizina.png"
+                    }
+                }
+            ],
+            "fecha": "2023-05-10T12:56:51.947347",
+            "empleado": {
+                "dni": "72164532",
+                "nombre": "Nicolas"
             }
         }
     ]

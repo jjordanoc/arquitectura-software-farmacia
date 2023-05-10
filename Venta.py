@@ -5,10 +5,21 @@ from Farmaceutico import Farmaceutico
 from ProductoFisico import ProductoFisico
 
 class Venta:
-    def __init__(self, empleado: Farmaceutico|dict, fecha: datetime) -> None:
+    def __init__(self, cantidades: List[int]|None, productos:List[dict]|None, fecha: datetime|str, empleado: Farmaceutico|dict) -> None:
         self.cantidades: List[int] = list()
         self.productos: List[ProductoFisico] = list()
-        self.fecha: datetime = fecha
+
+        if isinstance(cantidades, List):
+            self.cantidades: List[int] = cantidades
+
+        if isinstance(productos, List):
+            self.productos: List[ProductoFisico] = [ProductoFisico(**p) for p in productos]
+
+        if isinstance(fecha, datetime):
+            self.fecha: datetime = fecha
+        elif isinstance(fecha, str):
+            self.fecha = datetime.fromisoformat(fecha)
+
         if isinstance(empleado, Farmaceutico):
             self.empleado: Farmaceutico = empleado
         elif isinstance(empleado, dict):
