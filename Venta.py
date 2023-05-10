@@ -5,11 +5,14 @@ from Farmaceutico import Farmaceutico
 from ProductoFisico import ProductoFisico
 
 class Venta:
-    def __init__(self, empleado: Farmaceutico, fecha: datetime) -> None:
+    def __init__(self, empleado: Farmaceutico|dict, fecha: datetime) -> None:
         self.cantidades: List[int] = list()
         self.productos: List[ProductoFisico] = list()
-        self.empleado: Farmaceutico = empleado
         self.fecha: datetime = fecha
+        if isinstance(empleado, Farmaceutico):
+            self.empleado: Farmaceutico = empleado
+        elif isinstance(empleado, dict):
+            self.empleado = Farmaceutico(**empleado)
 
     def agregar(self, producto_fisico: ProductoFisico, cantidad: int) -> None:
         if (producto_fisico in self.productos):

@@ -2,10 +2,11 @@ from Tienda import *
 
 def menu() -> None:
     babel_farma: Tienda = Tienda("Av. Reducto 187")
+    babel_farma.load()
     print("\nBienvenido a BabelFarma!")
 
     while(True):
-        print("\nIngresa la contrasenia de administrador:")
+        print("\nIngresa la contrasenha de administrador:")
         contrasenia: str = input("Contrasenia (Ingrese -1 para salir): ")
 
         if (contrasenia == "1234"):

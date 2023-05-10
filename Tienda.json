@@ -1,1 +1,103 @@
-{}
+{
+    "direccion": "Av. Reducto 187",
+    "catalogo": {
+        "1234": {
+            "codigo": "1234",
+            "nombre": "Panadol",
+            "presentacion": "5un",
+            "descripcion": "Panadol para el dolor en pastilla",
+            "precio": "10",
+            "categoria": "Analgesico",
+            "url_imagen": "https://panadol.png"
+        },
+        "5678": {
+            "codigo": "5678",
+            "nombre": "Cetirizina",
+            "presentacion": "60ml",
+            "descripcion": "Cetirizina via oral",
+            "precio": "15",
+            "categoria": "Antihistaminico",
+            "url_imagen": "https://Cetirizina.png"
+        }
+    },
+    "productos": {
+        "202110068": {
+            "codigo_fisico": "202110068",
+            "stock": 12,
+            "fecha_expiracion": "2025-12-10T00:00:00",
+            "producto": {
+                "codigo": "1234",
+                "nombre": "Panadol",
+                "presentacion": "5un",
+                "descripcion": "Panadol para el dolor en pastilla",
+                "precio": "10",
+                "categoria": "Analgesico",
+                "url_imagen": "https://panadol.png"
+            }
+        },
+        "202110069": {
+            "codigo_fisico": "202110069",
+            "stock": 51,
+            "fecha_expiracion": "2028-10-05T00:00:00",
+            "producto": {
+                "codigo": "5678",
+                "nombre": "Cetirizina",
+                "presentacion": "60ml",
+                "descripcion": "Cetirizina via oral",
+                "precio": "15",
+                "categoria": "Antihistaminico",
+                "url_imagen": "https://Cetirizina.png"
+            }
+        }
+    },
+    "empleados": {
+        "71737321": {
+            "dni": "71737321",
+            "nombre": "Renato"
+        },
+        "71732945": {
+            "dni": "71732945",
+            "nombre": "Chachi"
+        },
+        "73028136": {
+            "dni": "73028136",
+            "nombre": "Joaquin"
+        },
+        "71349251": {
+            "dni": "71349251",
+            "nombre": "Josue"
+        },
+        "72164532": {
+            "dni": "72164532",
+            "nombre": "Nicolas"
+        }
+    },
+    "ventas": [
+        {
+            "cantidades": [
+                5
+            ],
+            "productos": [
+                {
+                    "codigo_fisico": "202110068",
+                    "stock": 12,
+                    "fecha_expiracion": "2025-12-10T00:00:00",
+                    "producto": {
+                        "codigo": "1234",
+                        "nombre": "Panadol",
+                        "presentacion": "5un",
+                        "descripcion": "Panadol para el dolor en pastilla",
+                        "precio": "10",
+                        "categoria": "Analgesico",
+                        "url_imagen": "https://panadol.png"
+                    }
+                }
+            ],
+            "fecha": "2023-05-10T11:39:15.219919",
+            "empleado": {
+                "dni": "71737321",
+                "nombre": "Renato"
+            }
+        }
+    ]
+}

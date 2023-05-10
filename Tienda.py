@@ -3,16 +3,22 @@ from Producto import Producto
 from ProductoFisico import ProductoFisico
 from typing import Optional, Dict, List
 from Farmaceutico import Farmaceutico
-from datetime import datetime
+from datetime import datetime, date
 from json import JSONEncoder
+from collections import namedtuple
 import json
 
 class MyEncoder(JSONEncoder):
     def default(self, object):
+        if isinstance(object, (date, datetime)):
+            return object.isoformat()
         if isinstance(object, Farmaceutico) or isinstance(object, Producto) or isinstance(object, ProductoFisico) or isinstance(object, Tienda) or isinstance(object, Venta) :
             return object.__dict__
         else:
             return json.JSONEncoder.default(self, object)
+
+def tienda_decoder(tiendaDict: dict):
+    return namedtuple('X', tiendaDict.keys())(*tiendaDict.values())
 
 class Tienda:
     def __init__(self, direccion: str) -> None:
@@ -22,12 +28,24 @@ class Tienda:
         self.empleados: Dict[str, Farmaceutico] = dict()
         self.ventas: List[Venta] = list()
 
-    def __init__(self, dict: dict) -> None:
-        pass
-
     def load(self) -> None:
         db = open("Tienda.json")
-        # Se carga la tienda
+        tienda_dict = json.load(db)
+        self.direccion = tienda_dict["direccion"]
+
+        for venta in tienda_dict["ventas"]:
+            self.ventas.append(Venta(**venta))
+
+        for key in tienda_dict["productos"]:
+            self.productos[key] = ProductoFisico(**tienda_dict["productos"][key])
+
+        for key in tienda_dict["catalogo"]:
+            if self.catalogo.get(key) is None:
+                self.catalogo[key] = Producto(**tienda_dict["catalogo"][key])
+
+        for key in tienda_dict["empleados"]:
+            if self.empleados.get(key) is None:
+                self.empleados[key] = Farmaceutico(**tienda_dict["empleados"][key])
 
         db.close()
 
@@ -120,3 +138,4 @@ class Tienda:
     def mostrar_empleados(self) -> None:
         for dni, empleado in self.empleados.items():
             empleado.mostrar_informacion()
+
