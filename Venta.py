@@ -49,3 +49,9 @@ class Venta:
             print("---------------------------------------------")
             print(p_f.mostrar_producto())
         print("---------------------------------------------")
+
+    def verificar_producto(self, codigo : str):
+        for producto in self.productos:
+            if producto.codigo == codigo:
+                return True
+        return False
