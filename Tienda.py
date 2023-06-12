@@ -68,10 +68,12 @@ class Tienda:
             codigo_fisico: str = input("Ingrese el codigo del producto a comprar (o -1 para dejar de agregar productos): ")
             if (codigo_fisico == "-1"):
                 break
-
+            
             existir : bool = venta.verificar_producto(codigo_fisico)
             if not existir: return False
 
+            producto_fisico: Optional[ProductoFisico] = self.productos.get(codigo_fisico)
+  
             print("Producto:")
             producto_fisico.mostrar_producto()
             cantidad: int = int(input("Ingresar la cantidad de este producto a adquirir: "))

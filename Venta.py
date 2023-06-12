@@ -26,11 +26,14 @@ class Venta:
             self.empleado = Farmaceutico(**empleado)
 
     def agregar(self, producto_fisico: ProductoFisico, cantidad: int) -> None:
+        if(cantidad < 0):
+            return False
         if (producto_fisico in self.productos):
-            self.cantidades[self.productos.index(producto_fisico)] += cantidad
+                self.cantidades[self.productos.index(producto_fisico)] += cantidad
         else:
             self.productos.append(producto_fisico)
             self.cantidades.append(cantidad)
+        return True
 
     def remover(self, producto_fisico: ProductoFisico, cantidad: int) -> bool:
         if (cantidad == 0):
@@ -39,10 +42,7 @@ class Venta:
             if (self.cantidades[self.productos.index(producto_fisico)] - cantidad >= 0):
                 self.cantidades[self.productos.index(producto_fisico)] -= cantidad
                 return True
-            else:
-                return False
-        else:
-            return False
+        return False
 
     def mostrar_productos(self) -> None:
         for p_f in self.productos:
@@ -52,6 +52,6 @@ class Venta:
 
     def verificar_producto(self, codigo : str):
         for producto in self.productos:
-            if producto.codigo == codigo:
+            if producto.codigo_fisico == codigo:
                 return True
         return False
